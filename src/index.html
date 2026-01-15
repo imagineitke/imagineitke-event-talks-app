@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Talks 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* CSS will be injected here */
     </style>
@@ -11,14 +12,19 @@
 <body>
     <header>
         <h1>Tech Talks 2026</h1>
-        <div class="search-container">
-            <label for="category-search">Filter by category:</label>
-            <input type="text" id="category-search" placeholder="e.g., AI, JavaScript, Cloud">
+        <div class="filter-container">
+            <span>Filter by category:</span>
+            <div id="category-filters"></div>
         </div>
     </header>
-    <main id="schedule-container">
-        <!-- Schedule will be injected here -->
-    </main>
+    <div class="main-content">
+        <main id="schedule-container">
+            <!-- Schedule will be injected here -->
+        </main>
+        <aside id="talk-details-container">
+            <div class="talk-details-placeholder">Click on a talk to see details</div>
+        </aside>
+    </div>
     <script>
         // JavaScript will be injected here
     </script>

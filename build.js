@@ -87,38 +87,13 @@ const htmlTemplate = fs.readFileSync(path.join(srcDir, 'index.html'), 'utf-8');
 const css = fs.readFileSync(path.join(srcDir, 'style.css'), 'utf-8');
 const js = fs.readFileSync(path.join(srcDir, 'script.js'), 'utf-8');
 
-const scheduleHtml = schedule.map(item => {
-    let itemHtml = `<div class="schedule-item ${item.type}">
-        <div class="schedule-time">${item.startTime} - ${item.endTime}</div>
-        <h2 class="talk-title">${item.title}</h2>`;
-
-    if (item.type === 'talk') {
-        itemHtml += `<div class="talk-speakers">Speakers: ${item.speakers.join(', ')}</div>
-            <div class="talk-categories">${item.categories.map(cat => `<span>${cat}</span>`).join('')}</div>
-            <div class="talk-description">${item.description}</div>`;
-    }
-
-    itemHtml += `</div>`;
-    return itemHtml;
-}).join('');
-
-let finalHtml = htmlTemplate.replace('/* CSS will be injected here */', css);
-finalHtml = finalHtml.replace('// JavaScript will be injected here', `
-    const talkData = ${JSON.stringify(schedule)};
-    ${js}
-`);
-
-// The script.js expects a script tag with id 'talk-data', which is not ideal.
-// Let's adapt the build script to inject the data in a way the script can use it.
-
 const finalJs = `
 const talkData = ${JSON.stringify(schedule)};
 ${js.replace(`JSON.parse(document.getElementById('talk-data').textContent)`, 'talkData')}
 `;
 
-finalHtml = htmlTemplate.replace('/* CSS will be injected here */', css);
+let finalHtml = htmlTemplate.replace('/* CSS will be injected here */', css);
 finalHtml = finalHtml.replace('// JavaScript will be injected here', finalJs);
-finalHtml = finalHtml.replace('<!-- Schedule will be injected here -->', scheduleHtml);
 
 
 if (!fs.existsSync(distDir)) {
