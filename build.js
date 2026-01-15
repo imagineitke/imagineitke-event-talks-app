@@ -87,10 +87,7 @@ const htmlTemplate = fs.readFileSync(path.join(srcDir, 'index.html'), 'utf-8');
 const css = fs.readFileSync(path.join(srcDir, 'style.css'), 'utf-8');
 const js = fs.readFileSync(path.join(srcDir, 'script.js'), 'utf-8');
 
-const finalJs = `
-const talkData = ${JSON.stringify(schedule)};
-${js.replace(`JSON.parse(document.getElementById('talk-data').textContent)`, 'talkData')}
-`;
+const finalJs = `const talkData = ${JSON.stringify(schedule)};\n${js}`;
 
 let finalHtml = htmlTemplate.replace('/* CSS will be injected here */', css);
 finalHtml = finalHtml.replace('// JavaScript will be injected here', finalJs);

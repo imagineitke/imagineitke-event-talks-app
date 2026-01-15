@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const talkData = JSON.parse(document.getElementById('talk-data').textContent);
     const scheduleContainer = document.getElementById('schedule-container');
     const categoryFiltersContainer = document.getElementById('category-filters');
     const talkDetailsContainer = document.getElementById('talk-details-container');
